@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container" id="loginPage">
+        <h3 class="text-center text-primary">Classic Bank Limited</h3>
+        <section class="my-form">
+            <h4>Login</h4><br>
+            <input type="email" class="form-control" name="" id="" placeholder="Your Email..." required><br>
+            <input type="password" class="form-control" name="" id="" placeholder="Your Password..." required><br>
+            <button class="btn btn-success" id="loginBtn">Login</button>
+
+        </section>
+    </div>
+    <div class="container" id="bank-info">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="deposit transaction">
+                    <h3>Deposit</h3>
+                    <h2>$ <span id="depositOutput">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="withdraw transaction">
+                    <h3>Withdraw</h3>
+                    <h2>$ <span id="withdrawOutput">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="balance transaction">
+                    <h3>Balance</h3>
+                    <h2>$ <span id="balanceOutput">1200</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="transaction-amount">
+                    <h3>Deposit Money</h3><br>
+                    <input type="text" class="form-control" name="deposit" id="depositInput" placeholder="$ Amount of money you deposit "><br>
+                    <button class="btn btn-success" id = "depositBtn">Deposit</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="transaction-amount">
+                    <h3>Withdraw Money</h3><br>
+                    <input type="text" class="form-control" name="withdraw" id="withdrawInput" placeholder="$ Amount of money you withdraw"><br>
+                    <button class="btn btn-success" id="withdrawBtn">Withdraw</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+            // login page javascript
+        const loginBtn = document.getElementById("loginBtn");
+        loginBtn.addEventListener("click", function(){
+            const loginPage = document.getElementById("loginPage");
+            loginPage.style.display = "none";
+            const bankInfo = document.getElementById("bank-info");
+            bankInfo.style.display = "block";
+        });
+
+
+            // bank information page javascript
+
+
+            // deposit button handler
+            
+        const depositBtn = document.getElementById("depositBtn");
+        depositBtn.addEventListener("click", function(){
+
+            addedDeposit = gettingInput("depositInput");
+            
+            transactioning("depositOutput", addedDeposit);
+            transactioning("balanceOutput", addedDeposit);
+
+            depositInput.value = "";
+
+        });
+
+
+        function transactioning(id, amount){
+            const output = document.getElementById(id);
+            const current = parseFloat(output.innerText);
+            const total = current + amount;
+            output.innerText = total;
+        }
+
+        function gettingInput(id){
+            const input = document.getElementById(id);
+            const inputAmount = parseFloat(input.value);
+            return inputAmount;
+        }
+
+
+
+                // withdraw button handler
+
+        const withdrawBtn = document.getElementById("withdrawBtn");
+        withdrawBtn.addEventListener("click", function(){
+
+            newWithdraw = gettingInput("withdrawInput");
+
+            transactioning("withdrawOutput", newWithdraw)
+            transactioning("balanceOutput", -1 * newWithdraw);
+
+            withdrawInput.value = "";
+            
+        });
+
+
+    </script>
+</body>
+</html>
